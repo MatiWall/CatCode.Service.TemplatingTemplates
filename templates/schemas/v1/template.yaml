@@ -1,0 +1,136 @@
+openapi: '3.0.3'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /test:
+    get:
+      responses:openapi: 3.0.0
+info:
+  title: Example API
+  version: 1.0.0
+
+components:
+  schemas:
+    Type:
+      type: string
+      enum:
+        - deployment
+        - cronjob
+        - generic
+    PropertyType:
+      type: string
+      enum:
+        - string
+        - dropdown
+
+    Metadata:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - name
+        - title
+        - description
+
+    Property:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/PropertyType'
+        description:
+          type: string
+      required:
+        - name
+        - type
+        - description
+
+    TemplateSpecParameters:
+      type: object
+      properties:
+        title:
+          type: string
+        required:
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Property'
+      required:
+        - title
+        - required
+        - properties
+
+    TemplateSteps:
+      type: object
+      properties:
+        name:
+          type: string
+        task:
+          type: string
+        input:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+        - name
+        - task
+        - input
+
+    TemplateOutputs:
+      type: object
+      # Define properties if needed; currently empty
+
+    TemplateSpec:
+      type: object
+      properties:
+        owner:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSpecParameters'
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSteps'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateOutputs'
+      required:
+        - owner
+        - type
+        - parameters
+        - steps
+        - outputs
+
+    Template:
+      type: object
+      properties:
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        spec:
+          $ref: '#/components/schemas/TemplateSpec'
+      required:
+        - kind
+        - metadata
+        - spec
+
+        '200':
+          description: OK

@@ -1,0 +1,11 @@
+
+# environments
+.venv/
+venv
+
+# pycharm
+.idea/
+
+
+secrets.yaml
+

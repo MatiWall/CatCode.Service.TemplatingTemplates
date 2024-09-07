@@ -1,0 +1,15 @@
+{
+  "system": {
+    "description": "The system to which this component belongs"
+  },
+  "application": {
+    "description": "The application to which this component belongs"
+  },
+  "deployable_unit": "The name project",
+  "description": "Project description",
+  "resource_type": {
+    "description": "CronJob or Deployment",
+    "default": "deployment",
+    "options": ["cronjob", "deployment"]
+  }
+}
