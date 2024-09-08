@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "v1alpha1",
+  "title": "Catalog Entity",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "apiVersion": {"type": "string"},
+    "kind": {
+      "type": "string",
+      "const": "Component"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "application": {
+          "type": "string"
+        },
+        "deployableUnit": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        }
+      },
+      "required": ["description", "system", "application", "deployableUnit", "version"]
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "lifecycle": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "dependecies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["type", "lifecycle", "owner", "dependecies"]
+    }
+  },
+  "required": ["kind", "metadata", "spec"]
+}
