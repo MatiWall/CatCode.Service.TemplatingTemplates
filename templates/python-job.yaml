@@ -1,2 +1,24 @@
 apiVersion: templating.catcode.mw/v1alpha1
+kind: Template
 metadata:
+  name: PythonCronjob
+  title: Python Cronjob Template
+  description: Python job template
+spec:
+  owner: mw
+  type: Service
+  parameters:
+    - title: Environment Variables
+      parameters:
+        - name: System
+          ui:field: Input
+          ui:otions:
+            - label: Development
+              value: dev
+            - label: Staging
+              value: staging
+            - label: Production
+              value: prod
+        - name: LOG_LEVEL
+          ui:field: Input
+
